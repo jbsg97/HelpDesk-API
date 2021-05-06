@@ -16,6 +16,6 @@ async def disconnect_db():
     await db.disconnect()
         
 
-@app.get("/")
-async def root():
+@app.get("/", tags=["Health Check"])
+async def health_check():
     return {"message": "Api working fine.."}

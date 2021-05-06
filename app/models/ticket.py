@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 import datetime
 
-class Ticket(BaseModel):
+class TicketOut(BaseModel):
     id_ticket: Optional[int]
     title: str
     body: str
@@ -10,9 +10,8 @@ class Ticket(BaseModel):
     status: str
     published_date: Optional[datetime.date] = datetime.date.today().strftime("%Y-%m-%d")
     
-class TicketCreate(BaseModel):
+class TicketIn(BaseModel):
     title: str
     body: str
     urgency: str
     status: str
-    published_date = datetime.date.today()
