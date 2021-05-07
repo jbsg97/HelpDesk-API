@@ -13,7 +13,7 @@ from ....services.ticket import (
 router = APIRouter()
 @cbv(router)
 class Ticket:
-    hola = "fdf"
+
     @router.get(
         "/ticket", 
         response_model=List[TicketIn], 
