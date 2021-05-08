@@ -1,6 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends
 from .api.v1.api import router as api_router
 from .db.db import db
+from .core.auth import oauth2_scheme
 
 app = FastAPI()
 
@@ -17,3 +18,7 @@ async def disconnect_db():
 @app.get("/", tags=["Health Check"])
 async def health_check():
     return {"message": "Api working fine.."}
+
+@app.get("/token")
+async def token(token: str = Depends(oauth2_scheme)):
+    return {'Token': token}
