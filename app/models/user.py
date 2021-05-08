@@ -20,3 +20,8 @@ class UserOut(BaseModel):
     name: str
     last_name: str
     disabled: Optional[bool] = False
+    
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
