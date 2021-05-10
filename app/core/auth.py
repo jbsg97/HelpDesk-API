@@ -25,7 +25,6 @@ async def check_jwt_token(token: str = Depends(oauth2_scheme)):
     try:
         jwt_payload = jwt.decode(token, SECRET_KEY, algorithms=ALGORITHM)
         username = jwt_payload.get("sub")
-        role = jwt_payload.get("role")
         expiration = jwt_payload.get("exp")
         if time.time() < expiration:
             is_valid = await verify_username(username)
