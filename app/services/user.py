@@ -33,7 +33,7 @@ async def retrieve_user(id_user):
 async def create_user(user):
     query = """insert into users(username, password, email, name, last_name, register_date, disabled)
             values(:username, :password, :email, :name, :last_name, :register_date, :disabled)"""
-    hashed_password = get_password_hash(user.password)
+    hashed_password = await get_password_hash(user.password)
     values = {
         'username': user.username,
         'password': hashed_password,
@@ -99,15 +99,11 @@ async def verify_user(username, password):
     try:
         user = await fetch(query, True, values)
         if not user:
-            print('No existe user')
             return False
-        if not verify_password(password, user['password']):
-            print('Contraseña no es igual')
+        if not await verify_password(password, user['password']):
             return False
-        print('todo es correcto')
         return user
     except Exception as e:
-        print(e)
         return None
     
 

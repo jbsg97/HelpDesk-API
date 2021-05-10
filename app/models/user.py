@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 import datetime
 
-class UserIn(BaseModel):
+class UserOut(BaseModel):
     id_user: int
     username: str
     password: str
@@ -13,7 +13,7 @@ class UserIn(BaseModel):
     disabled: Optional[bool] = False
     
 
-class UserOut(BaseModel):
+class UserIn(BaseModel):
     username: str
     password: str
     email: str

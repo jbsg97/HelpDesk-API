@@ -16,7 +16,7 @@ class User:
 
     @router.get(
         "/user", 
-        response_model=List[UserIn], 
+        response_model=List[UserOut], 
         status_code=status.HTTP_200_OK,
         tags=["User"]
     )
@@ -29,7 +29,7 @@ class User:
 
     @router.get(
         "/user/{id_user}", 
-        response_model=UserIn, 
+        response_model=UserOut, 
         status_code=status.HTTP_200_OK,
         tags=["User"]
     )
@@ -45,7 +45,7 @@ class User:
         status_code=status.HTTP_201_CREATED,
         tags=["User"]
     )
-    async def create(self, user: UserOut):
+    async def create(self, user: UserIn):
         user = await create_user(user)
         if user:
             return {"message": "Usuario creado con exito"}
@@ -55,10 +55,10 @@ class User:
     @router.put(
         "/user/{id_user}", 
         status_code=status.HTTP_200_OK,
-        response_model=UserIn,
+        response_model=UserOut,
         tags=["User"]
     )
-    async def update(self, id_user: int, user: UserOut):
+    async def update(self, id_user: int, user: UserIn):
         user = await update_user(id_user, user)
         if user:
             return user
@@ -67,7 +67,7 @@ class User:
     
     @router.delete(
         "/user/{id_user}", 
-        response_model=UserIn, 
+        response_model=UserOut, 
         status_code=status.HTTP_200_OK,
         tags=["User"]
     )

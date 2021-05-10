@@ -16,7 +16,7 @@ class Ticket:
 
     @router.get(
         "/ticket", 
-        response_model=List[TicketIn], 
+        response_model=List[TicketOut], 
         status_code=status.HTTP_200_OK,
         tags=["Ticket"]
     )
@@ -29,7 +29,7 @@ class Ticket:
 
     @router.get(
         "/ticket/{id_ticket}", 
-        response_model=TicketIn, 
+        response_model=TicketOut, 
         status_code=status.HTTP_200_OK,
         tags=["Ticket"]
     )
@@ -55,10 +55,10 @@ class Ticket:
     @router.put(
         "/ticket/{id_ticket}", 
         status_code=status.HTTP_200_OK,
-        response_model=TicketIn,
+        response_model=TicketOut,
         tags=["Ticket"]
     )
-    async def update(self, id_ticket: int, ticket: TicketOut):
+    async def update(self, id_ticket: int, ticket: TicketIn):
         ticket = await update_ticket(id_ticket, ticket)
         if ticket:
             return ticket
